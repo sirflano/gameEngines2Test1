@@ -53,6 +53,7 @@ public class Atom : MonoBehaviour {
                 Debug.Log("i:" + i + " j:" + j + " curRingDist:" + curRingDist + " degreesOfSeperation:" + degreesOfSeperation + " spawnOffset:" + spawnOffset);
                 GameObject electron = Instantiate(electonPrefab, spawnPos, transform.rotation);
                 electron.transform.parent = proton.transform;
+                electron.GetComponent<orbit>().centre = proton;
             }
         }
     }

@@ -7,6 +7,7 @@ public class Boid : MonoBehaviour {
     public Vector3 velocity;
     public Vector3 force;
     public Vector3 acceleration;
+    public float mass;
 
     private List<steeringBehaviour> behaviours = new List<steeringBehaviour>();
 
@@ -23,6 +24,16 @@ public class Boid : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         force = calculate();
+        acceleration = force / mass;
+
+        velocity += acceleration;
+        if(velocity.magnitude >= maxVelocity)
+        {
+            velocity.Normalize();
+            velocity *= maxVelocity;
+        }
+
+        transform.position += velocity;
 	}
 
     public Vector3 seekTarget(Vector3 target)
